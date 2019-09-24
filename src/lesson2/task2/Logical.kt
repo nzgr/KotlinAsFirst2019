@@ -3,6 +3,8 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 /**
  * Пример
@@ -18,7 +20,8 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
-fun isNumberHappy(number: Int): Boolean = TODO()
+fun isNumberHappy(number: Int): Boolean =
+    number / 1000 + number / 100 % 10 == number / 10 % 10 + number % 10
 
 /**
  * Простая
@@ -48,7 +51,10 @@ fun daysInMonth(month: Int, year: Int): Int = TODO()
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = TODO()
+): Boolean =
+    sqrt((x1 - x2).pow(2) + (y1 - y2).pow(2)) <= r2 - r1
+
+
 
 /**
  * Средняя
@@ -59,4 +65,5 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean =
+    (a <= r && (b <= s || c <= s)) || (b <= r && (a <= s || c <= s)) || (c <= r && (a <= s || b <= s))
