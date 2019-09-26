@@ -110,9 +110,11 @@ fun whichRookThreatens(
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
 ): Int {
-    return if ((kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2)) 3
-    else if (kingX == rookX1 || kingY == rookY1) 1
-    else if (kingX == rookX2 || kingY == rookY2) 2
+    val a = kingX == rookX1 || kingY == rookY1
+    val b = kingX == rookX2 || kingY == rookY2
+    return if (a && b) 3
+    else if (a) 1
+    else if (b) 2
     else 0
 }
 
@@ -142,28 +144,33 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    if (a > b && a > c)
-        return when {
-            (b + c < a) -> -1
-            (b * b + c * c == a * a) -> 1
-            (b * b + c * c > a * a) -> 0
-            else -> 2
+    var max: Double
+    var min1: Double
+    var min2: Double
+    when {
+        (a > b && a > c) -> {
+            max = a
+            min1 = b
+            min2 = c
         }
-    else if (b > a && b > c)
-        return when {
-            (a + c < b) -> -1
-            (a * a + c * c == b * b) -> 1
-            (a * a + c * c > b * b) -> 0
-            else -> 2
+        (b > a && b > c) -> {
+            max = b
+            min1 = a
+            min2 = c
         }
-    else if (c > a && c > b)
-        return when {
-            (a + b < c) -> -1
-            (a * a + b * b == c * c) -> 1
-            (a * a + b * b > c * c) -> 0
-            else -> 2
+        (c > a && c > b) -> {
+            max = c
+            min1 = a
+            min2 = b
         }
-    else return 0
+        else -> return 0
+    }
+    return when {
+        (min1 + min2 < max) -> -1
+        (min1 * min1 + min2 * min2 == max * max) -> 1
+        (min1 * min1 + min2 * min2 > max * max) -> 0
+        else -> 2
+    }
 }
 
 
