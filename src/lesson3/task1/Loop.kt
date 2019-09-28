@@ -8,6 +8,7 @@ import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.sqrt
 
+
 /**
  * Пример
  *
@@ -227,6 +228,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  */
 fun revert(n: Int): Int = TODO()
 
+
 /**
  * Средняя
  *
@@ -237,6 +239,7 @@ fun revert(n: Int): Int = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun isPalindrome(n: Int): Boolean = TODO()
+
 
 /**
  * Средняя
@@ -257,7 +260,30 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var k = 0
+    var c = 1
+    var s = 1
+    var m: Int
+    var p = 1
+    var sv: Int
+    while (k < n) {
+        s = c * c
+        c += 1
+        sv = s
+        while (sv > 0) {
+            k += 1
+            sv /= 10
+        }
+    }
+    m = k - n
+    while (m > 0) {
+        p *= 10
+        m -= 1
+    }
+    return s / p % 10
+}
+
 
 /**
  * Сложная
@@ -268,4 +294,28 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var k = 0
+    var m: Int
+    var p = 1
+    var sv: Int
+    var kv: Int
+    var fib1 = 0
+    var fib2 = 1
+    while (k < n) {
+        kv = fib1
+        fib1 = fib2
+        fib2 = fib1 + kv
+        sv = fib1
+        while (sv > 0) {
+            k += 1
+            sv /= 10
+        }
+    }
+    m = k - n
+    while (m > 0) {
+        p *= 10
+        m -= 1
+    }
+    return fib1 / p % 10
+}
