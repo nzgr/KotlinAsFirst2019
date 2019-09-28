@@ -146,9 +146,9 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    var max: Double
-    var min1: Double
-    var min2: Double
+    val max: Double
+    val min1: Double
+    val min2: Double
     when {
         (a > b && a > c) -> {
             max = a
