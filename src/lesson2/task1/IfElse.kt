@@ -112,10 +112,12 @@ fun whichRookThreatens(
 ): Int {
     val a = kingX == rookX1 || kingY == rookY1
     val b = kingX == rookX2 || kingY == rookY2
-    return if (a && b) 3
-    else if (a) 1
-    else if (b) 2
-    else 0
+    return when {
+        a && b -> 3
+        a -> 1
+        b -> 2
+        else -> 0
+    }
 }
 
 
