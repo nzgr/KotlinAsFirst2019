@@ -117,7 +117,6 @@ fun lcm(m: Int, n: Int): Int {
  */
 fun minDivisor(n: Int): Int {
     val m = sqrt(n.toDouble()).toInt()
-    if (n == 2) return 2
     for (i in 2..m)
         if (n % i == 0)
             return i
@@ -131,7 +130,6 @@ fun minDivisor(n: Int): Int {
  */
 fun maxDivisor(n: Int): Int {
     val m = sqrt(n.toDouble()).toInt()
-    if (n == 2) return 1
     for (i in 2..m)
         if (n % i == 0)
             return n / i
@@ -193,18 +191,16 @@ fun collatzSteps(x: Int): Int {
  */
 fun sin(x: Double, eps: Double): Double {
     var sinx = 0.0
-    var p = eps + 1.0
-    var n = 1
-    var k = 0
+    var p: Double
+    var n = 2
     var mx = x
-    while (mx >= 2 * PI) mx -= 2 * PI
-    while (mx <= -2 * PI) mx += 2 * PI
-    while (abs(p) > eps) {
-        p = (-1.0).pow(k.toDouble()) * mx.pow(n) / factorial(n)
+    while (abs(mx) >= 2 * PI) if (mx > 0) mx -= 2 * PI else mx += 2 * PI
+    p = mx
+    do {
         sinx += p
-        k += 1
+        p = -1.0 * p * mx * mx / n / (n + 1)
         n += 2
-    }
+    } while (abs(p) > eps)
     return sinx
 }
 
