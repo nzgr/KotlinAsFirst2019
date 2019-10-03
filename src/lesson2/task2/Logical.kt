@@ -22,9 +22,7 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  */
 fun isNumberHappy(number: Int): Boolean {
     fun s(n: Int) = n % 10 + n / 10
-    return if
-        (s(number / 100) == s(number % 100)) true
-        else false
+    return s(number / 100) == s(number % 100)
 }
 
 /**
