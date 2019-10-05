@@ -193,8 +193,7 @@ fun sin(x: Double, eps: Double): Double {
     var sinx = 0.0
     var p: Double
     var n = 2
-    var mx = x
-    while (abs(mx) >= 2 * PI) if (mx > 0) mx -= 2 * PI else mx += 2 * PI
+    val mx = x - (x / (2 * PI)).toInt() * 2 * PI
     p = mx
     do {
         sinx += p
