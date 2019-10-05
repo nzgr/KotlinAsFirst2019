@@ -259,15 +259,11 @@ fun squareSequenceDigit(n: Int): Int {
     var k = 0
     var c = 1
     var s = 1
-    var sv: Int
     while (k < n) {
         s = c * c
         c += 1
-        sv = s
-        while (sv > 0) {
-            k += 1
-            sv /= 10
-        }
+        val sv = s
+        k += digitNumber(sv)
     }
     return (s / 10.0.pow(k - n) % 10).toInt()
 }
@@ -284,7 +280,6 @@ fun squareSequenceDigit(n: Int): Int {
  */
 fun fibSequenceDigit(n: Int): Int {
     var k = 0
-    var sv: Int
     var kv: Int
     var fib1 = 0
     var fib2 = 1
@@ -292,11 +287,8 @@ fun fibSequenceDigit(n: Int): Int {
         kv = fib1
         fib1 = fib2
         fib2 = fib1 + kv
-        sv = fib1
-        while (sv > 0) {
-            k += 1
-            sv /= 10
-        }
+        val sv = fib1
+        k += digitNumber(sv)
     }
     return (fib1 / 10.0.pow(k - n) % 10).toInt()
 }
