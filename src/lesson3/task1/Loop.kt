@@ -286,8 +286,7 @@ fun fibSequenceDigit(n: Int): Int {
         kv = fib1
         fib1 = fib2
         fib2 = fib1 + kv
-        val sv = fib1
-        k += digitNumber(sv)
+        k += digitNumber(fib1)
     }
     return (fib1 / 10.0.pow(k - n) % 10).toInt()
 }
