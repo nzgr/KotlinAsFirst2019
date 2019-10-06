@@ -262,8 +262,7 @@ fun squareSequenceDigit(n: Int): Int {
     while (k < n) {
         s = c * c
         c += 1
-        val sv = s
-        k += digitNumber(sv)
+        k += digitNumber(s)
     }
     return (s / 10.0.pow(k - n) % 10).toInt()
 }
