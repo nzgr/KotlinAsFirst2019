@@ -2,6 +2,7 @@
 
 package lesson4.task1
 
+import javafx.beans.binding.StringBinding
 import lesson1.task1.discriminant
 import lesson3.task1.minDivisor
 import kotlin.math.pow
@@ -236,7 +237,18 @@ fun convert(n: Int, base: Int): List<Int> {
  * (например, n.toString(base) и подобные), запрещается.
  */
 
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String {
+    val a = convert(n, base)
+    val res = StringBuilder()
+    for (elem in a)
+        if (elem >= 10)
+            res.append('a' + elem - 10)
+        else
+            res.append(elem)
+    return res.toString()
+}
+
+
 
 /**
  * Средняя
@@ -257,6 +269,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
  *
  * Перевести число, представленное цифровой строкой str,
  * из системы счисления с основанием base в десятичную.
+ *
  * Цифры более 9 представляются латинскими строчными буквами:
  * 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: str = "13c", base = 14 -> 250
@@ -264,7 +277,16 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int {
+    val a = mutableListOf<Int>()
+    for (i in str.indices)
+        if (str[i] >= 'a')
+            a.add(10 + (str[i] - 'a'))
+        else
+            a.add(str[i] - '0')
+    return decimal(a, base)
+}
+
 
 /**
  * Сложная
