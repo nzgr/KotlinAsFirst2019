@@ -312,7 +312,6 @@ fun russian(n: Int): String {
     var k = 1
     var c = 1
     var m = n
-    if (n == 0) return 0.toString()
     while (k > 0) {
         if (nx / 1000 > 0) {
             nx = n / 1000
