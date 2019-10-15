@@ -224,7 +224,7 @@ fun convert(n: Int, base: Int): List<Int> {
         nx /= base
     }
     return if (n == 0) b else
-     a.reversed()
+        a.reversed()
 }
 
 /**
