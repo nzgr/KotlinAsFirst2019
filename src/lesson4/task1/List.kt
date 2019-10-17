@@ -310,7 +310,6 @@ fun russian(n: Int): String {
     val a = mutableListOf<String>()
     var nx = n
     var k = 1
-    var c = 1
     var m = n
     while (k > 0) {
         if (nx / 1000 > 0) {
@@ -318,7 +317,7 @@ fun russian(n: Int): String {
             k++
         } else nx = n % 1000
         when (nx / 100) {
-            0 -> c++
+            0 -> {}
             1 -> a.add("сто")
             2 -> a.add("двести")
             3 -> a.add("триста")
@@ -330,7 +329,7 @@ fun russian(n: Int): String {
             else -> a.add("девятьсот")
         }
         when (nx % 100 / 10) {
-            0 -> c++
+            0 -> {}
             1 -> when (nx % 10) {
                 0 -> a.add("десять")
                 1 -> a.add("одиннадцать")
