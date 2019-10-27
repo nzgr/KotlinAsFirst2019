@@ -70,7 +70,7 @@ fun main() {
  * входными данными.
  */
 fun dateStrToDigit(str: String): String {
-    if (str.toList().isEmpty()) return ""
+    if (str.toList().size < 3) return ""
     val x = str.split(" ")
     val n = x[0].toInt()
     val xx = x.toMutableList()
