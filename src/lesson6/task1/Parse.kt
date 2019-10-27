@@ -73,6 +73,7 @@ fun dateStrToDigit(str: String): String {
     val x = str.split(" ")
     val n = x[0].toInt()
     val xx = x.toMutableList()
+    if (str == "") return ""
     if (x.size > 2) {
         val p = x[2].toInt()
         when (x[1]) {
