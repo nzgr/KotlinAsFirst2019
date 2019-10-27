@@ -70,10 +70,10 @@ fun main() {
  * входными данными.
  */
 fun dateStrToDigit(str: String): String {
+    if (str.toList().isEmpty()) return ""
     val x = str.split(" ")
     val n = x[0].toInt()
     val xx = x.toMutableList()
-    if (str == "") return ""
     if (x.size > 2) {
         val p = x[2].toInt()
         when (x[1]) {
@@ -95,8 +95,7 @@ fun dateStrToDigit(str: String): String {
         if ((x[0] <= "31" && (xx[1] == "01" || xx[1] == "03" || xx[1] == "05" || xx[1] == "07" || xx[1] == "08" || xx[1] == "10" || xx[1] == "12")) || (x[0] <= "30" && (xx[1] == "04" || xx[1] == "06" || xx[1] == "09" || xx[1] == "11")) || (x[0] <= "28" && xx[1] == "02") || (x[0] == "29" && xx[1] == "02" && ((p % 400 == 0) || (p % 100 != 0 && p % 4 == 0))))
             return xx.joinToString(separator = ".")
         return ""
-    }
-    else return ""
+    } else return ""
 }
 
 /**
