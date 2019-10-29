@@ -2,7 +2,6 @@
 
 package lesson4.task1
 
-import javafx.beans.binding.StringBinding
 import lesson1.task1.discriminant
 import lesson3.task1.minDivisor
 import kotlin.math.pow
@@ -162,8 +161,12 @@ fun times(a: List<Int>, b: List<Int>): Int {
  * Значение пустого многочлена равно 0 при любом x.
  */
 fun polynom(p: List<Int>, x: Int): Int {
+    var n = 1
     var px = 0
-    for (i in p.indices) px += p[i] * x.toDouble().pow(i).toInt()
+    for (i in p.indices) {
+        px += p[i] * n
+        n *= x
+    }
     return px
 }
 
@@ -195,7 +198,7 @@ fun factorize(n: Int): List<Int> {
         a.add(b)
         nx /= b
     }
-    return a.sorted()
+    return a
 }
 
 /**
@@ -217,14 +220,12 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
  */
 fun convert(n: Int, base: Int): List<Int> {
     var nx = n
-    val b = mutableListOf(0)
     val a = mutableListOf<Int>()
     while (nx != 0) {
         a.add(nx % base)
         nx /= base
     }
-    return if (n == 0) b else
-        a.reversed()
+    return a.reversed()
 }
 
 /**
@@ -259,9 +260,12 @@ fun convertToString(n: Int, base: Int): String {
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
 fun decimal(digits: List<Int>, base: Int): Int {
+    var sumx = base.toDouble().pow(digits.size - 1).toInt()
     var sum = 0
-    for (i in digits.indices)
-        sum += digits[i] * base.toDouble().pow(digits.size - i - 1).toInt()
+    for (i in digits.indices) {
+        sum += digits[i] * sumx
+        sumx /= base
+    }
     return sum
 }
 
@@ -317,7 +321,8 @@ fun russian(n: Int): String {
             k++
         } else nx = n % 1000
         when (nx / 100) {
-            0 -> {}
+            0 -> {
+            }
             1 -> a.add("сто")
             2 -> a.add("двести")
             3 -> a.add("триста")
@@ -329,7 +334,8 @@ fun russian(n: Int): String {
             else -> a.add("девятьсот")
         }
         when (nx % 100 / 10) {
-            0 -> {}
+            0 -> {
+            }
             1 -> when (nx % 10) {
                 0 -> a.add("десять")
                 1 -> a.add("одиннадцать")
