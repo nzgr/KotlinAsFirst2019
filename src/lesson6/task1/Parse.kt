@@ -2,6 +2,8 @@
 
 package lesson6.task1
 
+import lesson2.task2.daysInMonth
+
 /**
  * Пример
  *
@@ -91,7 +93,7 @@ fun dateStrToDigit(str: String): String {
         else -> return ""
     }
     if (n in 1..9) xx[0] = "0$n"
-    if ((x[0] <= "31" && (xx[1] == "01" || xx[1] == "03" || xx[1] == "05" || xx[1] == "07" || xx[1] == "08" || xx[1] == "10" || xx[1] == "12")) || (x[0] <= "30" && (xx[1] == "04" || xx[1] == "06" || xx[1] == "09" || xx[1] == "11")) || (x[0] <= "28" && xx[1] == "02") || (x[0] == "29" && xx[1] == "02" && ((p % 400 == 0) || (p % 100 != 0 && p % 4 == 0))))
+    if (daysInMonth(xx[1].toInt(), p).toString() >= x[0])
         return xx.joinToString(separator = ".")
     return ""
 
@@ -112,7 +114,7 @@ fun dateDigitToStr(digital: String): String {
     if (x.size != 3) return ""
     val n = x[0].toIntOrNull() ?: return ""
     val xx = x.toMutableList()
-    val p = x[2].toInt()
+    val p = x[2].toIntOrNull() ?: return ""
     when (x[1]) {
         "01" -> xx[1] = "января"
         "02" -> xx[1] = "февраля"
@@ -129,7 +131,7 @@ fun dateDigitToStr(digital: String): String {
         else -> return ""
     }
     if (n in "01".toInt().."09".toInt()) xx[0] = "$n"
-    if ((x[0] <= "31" && (x[1] == "01" || x[1] == "03" || x[1] == "05" || x[1] == "07" || x[1] == "08" || x[1] == "10" || x[1] == "12")) || (x[0] <= "30" && (x[1] == "04" || x[1] == "06" || x[1] == "09" || x[1] == "11")) || (x[0] <= "28" && x[1] == "02") || (x[0] == "29" && x[1] == "02" && ((p % 400 == 0) || (p % 100 != 0 && p % 4 == 0))))
+    if (daysInMonth(x[1].toInt(), p).toString() >= x[0])
         return xx.joinToString(separator = " ")
     return ""
 
@@ -162,15 +164,15 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int {
-    val x = jumps.split(" ", "-", "%")
-    if ("+" in x.toSet()) return -1
-    var max = x[0]
-    val m = x[0].toIntOrNull() ?: return -1
-    for (i in x.indices)
-        if (x[i] > max)
-            max = x[i]
-    if (x.size <= 1) return -1
-    return max.toInt()
+    val x = jumps.split(" ").filter { it != "-" && it != "%" }
+    if (x.isEmpty()) return -1
+    var m = x[0].toIntOrNull() ?: return -1
+    for (elem in x) {
+        val e = elem.toIntOrNull() ?: return -1
+        if (e > m)
+            m = e
+    }
+    return m
 }
 
 /**
