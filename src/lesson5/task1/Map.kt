@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import lesson8.task1.findNearestCirclePair
+
 /**
  * Пример
  *
@@ -281,7 +283,13 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    for (i in list.indices)
+        for (j in list.indices)
+            if ((list[i] + list[j] == number) && (i != j))
+                return Pair(first = i, second = j)
+    return -1 to -1
+}
 
 /**
  * Очень сложная
