@@ -163,8 +163,8 @@ fun times(a: List<Int>, b: List<Int>): Int {
 fun polynom(p: List<Int>, x: Int): Int {
     var n = 1
     var px = 0
-    for (i in p.indices) {
-        px += p[i] * n
+    for (elem in p) {
+        px += elem * n
         n *= x
     }
     return px
