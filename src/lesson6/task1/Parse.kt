@@ -186,7 +186,14 @@ fun bestLongJump(jumps: String): Int {
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    var max = "0"
+    val x = jumps.split(" ")
+    for (i in x.indices)
+        if (x[i].contains("+") && (x[i - 1] > max)) max = x[i - 1]
+    return if (max == "0") -1
+    else max.toInt()
+}
 
 /**
  * Сложная
