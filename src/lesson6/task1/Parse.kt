@@ -208,7 +208,7 @@ fun plusMinus(expression: String): Int {
     val x = expression.split(" ")
     var rez = x[0].toIntOrNull() ?: throw IllegalArgumentException()
     for (i in x.indices) {
-        if ((i % 2 == 0) && (x[i].contains("+") || x[i].contains("-"))) throw IllegalArgumentException()
+        require(!((i % 2 == 0) && (x[i].contains("+") || x[i].contains("-"))))
         if (x[i] == "+") rez += x[i + 1].toInt()
         if (x[i] == "-") rez -= x[i + 1].toInt()
     }
@@ -223,7 +223,15 @@ fun plusMinus(expression: String): Int {
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    var m = -1
+    val x = str.split(" ")
+    val b = x.size - 1
+    if (b < 1) return -1
+    for (i in 0..b)
+        if (x[i] == x[i + 1]) m = i
+    return m
+}
 
 /**
  * Сложная
