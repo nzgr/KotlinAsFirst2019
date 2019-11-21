@@ -2,8 +2,6 @@
 
 package lesson5.task1
 
-import lesson8.task1.findNearestCirclePair
-
 /**
  * Пример
  *

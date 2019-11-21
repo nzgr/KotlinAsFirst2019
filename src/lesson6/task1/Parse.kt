@@ -92,11 +92,10 @@ fun dateStrToDigit(str: String): String {
         "декабря" -> xx[1] = "12"
         else -> return ""
     }
-    if (n in 1..9) xx[0] = "0$n"
+    xx[0] = "$n".padStart(2, '0')
     if (daysInMonth(xx[1].toInt(), p).toString() >= x[0])
         return xx.joinToString(separator = ".")
     return ""
-
 }
 
 /**
