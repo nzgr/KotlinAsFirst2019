@@ -76,15 +76,16 @@ fun sibilants(inputName: String, outputName: String) {
             while (i < elem.length) {
                 if (elem[i].toString() == "ж" || elem[i].toString() == "Ж" || elem[i].toString() == "ч" || elem[i].toString() == "Ч" || elem[i].toString() == "ш" || elem[i].toString() == "Ш" || elem[i].toString() == "щ" || elem[i].toString() == "Щ") {
                     result.write(elem[i].toString())
-                    if (i != elem.length)
-                    when (elem[i + 1].toString()) {
-                        "ы" -> result.write("и")
-                        "Ы" -> result.write("И")
-                        "ю" -> result.write("у")
-                        "Ю" -> result.write("У")
-                        "я" -> result.write("а")
-                        "Я" -> result.write("А")
-                        else -> result.write(elem[i + 1].toString())
+                    if (i != elem.length - 1) {
+                        when (elem[i + 1].toString()) {
+                            "ы" -> result.write("и")
+                            "Ы" -> result.write("И")
+                            "ю" -> result.write("у")
+                            "Ю" -> result.write("У")
+                            "я" -> result.write("а")
+                            "Я" -> result.write("А")
+                            else -> result.write(elem[i + 1].toString())
+                        }
                     }
                     i++
                 } else result.write(elem[i].toString())
@@ -118,15 +119,17 @@ fun centerFile(inputName: String, outputName: String) {
     File(outputName).bufferedWriter().use {
         var max = -1
         for (line in File(inputName).readLines()) {
-            if (line.length > max) max = line.length
+            val m = line.trim()
+            if (m.length > max) max = m.length
         }
         for (line in File(inputName).readLines()) {
+            val m = line.trim()
             var k = 0
-            while (k < (max - line.length) / 2) {
+            while (k < (max - m.length) / 2) {
                 it.write(" ")
                 k++
             }
-            it.write(line)
+            it.write(m)
             it.newLine()
         }
     }
