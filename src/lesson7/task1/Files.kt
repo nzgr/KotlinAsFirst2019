@@ -3,6 +3,7 @@
 package lesson7.task1
 
 import java.io.File
+import kotlin.math.pow
 
 /**
  * Пример
@@ -74,7 +75,10 @@ fun sibilants(inputName: String, outputName: String) {
         for (elem in File(inputName).readLines()) {
             var i = 0
             while (i < elem.length) {
-                if (elem[i].toString() == "ж" || elem[i].toString() == "Ж" || elem[i].toString() == "ч" || elem[i].toString() == "Ч" || elem[i].toString() == "ш" || elem[i].toString() == "Ш" || elem[i].toString() == "щ" || elem[i].toString() == "Щ") {
+                if (elem[i].toString() == "ж" || elem[i].toString() == "Ж"
+                    || elem[i].toString() == "ч" || elem[i].toString() == "Ч"
+                    || elem[i].toString() == "ш" || elem[i].toString() == "Ш"
+                    || elem[i].toString() == "щ" || elem[i].toString() == "Щ") {
                     result.write(elem[i].toString())
                     if (i != elem.length - 1) {
                         when (elem[i + 1].toString()) {
@@ -84,7 +88,7 @@ fun sibilants(inputName: String, outputName: String) {
                             "Ю" -> result.write("У")
                             "я" -> result.write("а")
                             "Я" -> result.write("А")
-                            else -> result.write(elem[i + 1].toString())
+                            else -> i--
                         }
                     }
                     i++
@@ -508,6 +512,65 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
  *
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-    TODO()
+    File(outputName).bufferedWriter().use {
+        it.write(" ")
+        it.write("$lhv")
+        it.write(" | ")
+        it.write("$rhv")
+        val rezultatdeleniya = lhv / rhv
+        val ostatochek = lhv / rhv
+        var minirez = rezultatdeleniya
+        it.newLine()
+        it.write("-")
+        var k = 0
+        while (minirez > 9) {
+            minirez /= 10
+            k++
+        }
+        val p = minirez * rhv
+        it.write("$p")
+        var dlinapervoistroki = lhv.toString().length + 4 + rhv.toString().length
+        var probelvovtoroi = dlinapervoistroki - rezultatdeleniya.toString().length - (minirez * rhv).toString().length
+        for (h in 1..probelvovtoroi)
+            it.write(" ")
+        it.write("$rezultatdeleniya")
+        it.newLine()
+        var probel = (minirez * rhv).toString().length
+        for (hx in 0..probel)
+            it.write("-")
+        it.newLine()
+        var ost = (lhv - rhv * minirez * 10.0.pow(k)).toInt()
+        while (ost > rhv) {
+            var m = 0
+            var ostx = ost
+            while (ostx > 0) {
+                ostx /= 10
+                m++
+            }
+            var lev = (ost / 10.0.pow(m - 2)).toInt()
+            for (hx in 0..(probel - lev.toString().length))
+                it.write(" ")
+            it.write("$lev")
+            it.newLine()
+            k -= 1
+            var s = rezultatdeleniya / 10.0.pow(k-1) % 10.0.pow(k)
+            for (hx in 0..(probel - s.toString().length-1))
+                it.write(" ")
+            it.write("-")
+            it.write("$s")
+            it.newLine()
+            for (hx in 0..(probel - s.toString().length-1))
+                it.write(" ")
+            for (hx in 0..s.toString().length-1)
+                it.write("-")
+            ost = (ost % 10.0.pow(m)).toInt()
+
+
+
+
+        }
+it.write("$ostatochek")
+
+    }
 }
 
