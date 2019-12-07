@@ -182,21 +182,24 @@ fun alignFileByWidth(inputName: String, outputName: String) {
             var biglengthx = 0
             for (elem in mx)
                 biglengthx += elem.length
-            if (mx.isEmpty()) it.write(" ") else
-                if (mx.size == 1) it.write(line.trim())
+            if (mx.isEmpty())
+                it.write(" ")
+            else
+                if (mx.size == 1)
+                    it.write(line.trim())
                 else {
-                    val vsegoprobelov = max - biglengthx
-                    val odinprobel = vsegoprobelov / (mx.size - 1)
-                    val ostatok = vsegoprobelov - odinprobel * (mx.size - 1)
+                    val v = max - biglengthx
+                    val od = v / (mx.size - 1)
+                    val ost = v - od * (mx.size - 1)
                     for (i in mx.indices) {
                         it.write(mx[i])
                         when {
-                            (i < ostatok && mx.size - 1 != i) ->
-                                for (k in 1..(odinprobel + 1))
+                            (i < ost && mx.size - 1 != i) ->
+                                for (k in 1..(od + 1))
                                     it.write(" ")
 
                             (i != mx.size - 1) ->
-                                for (k in 1..odinprobel)
+                                for (k in 1..od)
                                     it.write(" ")
                             else -> {
 
