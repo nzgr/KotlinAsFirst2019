@@ -2,7 +2,6 @@
 
 package lesson3.task1
 
-import com.sun.org.apache.xalan.internal.xslt.Process
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.pow
