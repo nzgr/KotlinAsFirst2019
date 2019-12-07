@@ -78,7 +78,8 @@ fun sibilants(inputName: String, outputName: String) {
                 if (elem[i].toString() == "ж" || elem[i].toString() == "Ж"
                     || elem[i].toString() == "ч" || elem[i].toString() == "Ч"
                     || elem[i].toString() == "ш" || elem[i].toString() == "Ш"
-                    || elem[i].toString() == "щ" || elem[i].toString() == "Щ") {
+                    || elem[i].toString() == "щ" || elem[i].toString() == "Щ"
+                ) {
                     result.write(elem[i].toString())
                     if (i != elem.length - 1) {
                         when (elem[i + 1].toString()) {
@@ -99,7 +100,6 @@ fun sibilants(inputName: String, outputName: String) {
         }
     }
 }
-
 
 
 /**
@@ -138,6 +138,7 @@ fun centerFile(inputName: String, outputName: String) {
         }
     }
 }
+
 /**
  * Сложная
  *
@@ -205,8 +206,6 @@ fun alignFileByWidth(inputName: String, outputName: String) {
                 }
             it.newLine()
         }
-
-
     }
 }
 
@@ -543,7 +542,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         while (ost > rhv) {
             var m = 0
             var ostx = ost
-            while (ostx > 0) {
+            while (ostx != 0) {
                 ostx /= 10
                 m++
             }
@@ -553,23 +552,22 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
             it.write("$lev")
             it.newLine()
             k -= 1
-            var s = rezultatdeleniya / 10.0.pow(k-1) % 10.0.pow(k)
-            for (hx in 0..(probel - s.toString().length-1))
+            var s = rezultatdeleniya / 10.0.pow(k - 1) % 10.0.pow(k)
+            for (hx in 0..(probel - s.toString().length - 1))
                 it.write(" ")
             it.write("-")
             it.write("$s")
             it.newLine()
-            for (hx in 0..(probel - s.toString().length-1))
+            for (hx in 0..(probel - s.toString().length - 1))
                 it.write(" ")
-            for (hx in 0..s.toString().length-1)
+            for (hx in 0..s.toString().length - 1)
                 it.write("-")
-            ost = (ost % 10.0.pow(m)).toInt()
-
-
+            it.newLine()
+            ost = (ost % 10.0.pow(m - 1)).toInt()
 
 
         }
-it.write("$ostatochek")
+        it.write("$ostatochek")
 
     }
 }
