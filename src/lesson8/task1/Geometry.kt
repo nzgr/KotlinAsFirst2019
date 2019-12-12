@@ -71,6 +71,7 @@ class Triangle private constructor(private val points: Set<Point>) {
  * Окружность с заданным центром и радиусом
  */
 data class Circle(val center: Point, val radius: Double) {
+
     /**
      * Простая
      *
@@ -80,9 +81,10 @@ data class Circle(val center: Point, val radius: Double) {
      * Расстояние между пересекающимися окружностями считать равным 0.0.
      */
     fun distance(other: Circle): Double {
-       val d =  center.distance(other.center) - (radius + other.radius)
+        val d = center.distance(other.center) - (radius + other.radius)
         return if (d > 0) d else 0.0
     }
+
     /**
      * Тривиальная
      *
