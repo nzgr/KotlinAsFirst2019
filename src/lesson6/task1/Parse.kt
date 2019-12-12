@@ -74,27 +74,27 @@ fun main() {
 fun dateStrToDigit(str: String): String {
     val x = str.split(" ")
     if (x.size != 3) return ""
-    val n = x[0].toIntOrNull() ?: return ""
-    val xx = x.toMutableList()
-    val p = x[2].toInt()
-    when (x[1]) {
-        "января" -> xx[1] = "01"
-        "февраля" -> xx[1] = "02"
-        "марта" -> xx[1] = "03"
-        "апреля" -> xx[1] = "04"
-        "мая" -> xx[1] = "05"
-        "июня" -> xx[1] = "06"
-        "июля" -> xx[1] = "07"
-        "августа" -> xx[1] = "08"
-        "сентября" -> xx[1] = "09"
-        "октября" -> xx[1] = "10"
-        "ноября" -> xx[1] = "11"
-        "декабря" -> xx[1] = "12"
+    var day = x[0]
+    var month = x[1]
+    val year = x[2].toInt()
+    when (month) {
+        "января" -> month = "01"
+        "февраля" -> month = "02"
+        "марта" -> month = "03"
+        "апреля" -> month = "04"
+        "мая" -> month = "05"
+        "июня" -> month = "06"
+        "июля" -> month = "07"
+        "августа" -> month = "08"
+        "сентября" -> month = "09"
+        "октября" -> month = "10"
+        "ноября" -> month = "11"
+        "декабря" -> month = "12"
         else -> return ""
     }
-    xx[0] = "$n".padStart(2, '0')
-    if (daysInMonth(xx[1].toInt(), p).toString() >= x[0])
-        return xx.joinToString(separator = ".")
+    day = "$day".padStart(2, '0')
+    if (daysInMonth(month.toInt(), year).toString() >= x[0])
+        return "$day.$month.$year"
     return ""
 }
 
