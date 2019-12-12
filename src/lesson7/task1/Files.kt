@@ -171,24 +171,24 @@ fun alignFileByWidth(inputName: String, outputName: String) {
         var max = -1
         for (line in File(inputName).readLines()) {
             val m = line.trim().split(Regex("\\s+"))
-            var biglength = 0
+            var bigLength = 0
             for (elem in m)
-                biglength += elem.length
-            if (biglength + m.size - 1 > max)
-                max = biglength + m.size - 1
+                bigLength += elem.length
+            if (bigLength + m.size - 1 > max)
+                max = bigLength + m.size - 1
         }
         for (line in File(inputName).readLines()) {
             val mx = line.trim().split(Regex("\\s+"))
-            var biglengthx = 0
+            var bigLengthx = 0
             for (elem in mx)
-                biglengthx += elem.length
-            if (mx.isEmpty())
-                it.write(" ")
-            else
-                if (mx.size == 1)
+                bigLengthx += elem.length
+            when {
+                (mx.isEmpty()) ->
+                    it.write(" ")
+                (mx.size == 1) ->
                     it.write(line.trim())
-                else {
-                    val v = max - biglengthx
+                else -> {
+                    val v = max - bigLengthx
                     val od = v / (mx.size - 1)
                     val ost = v - od * (mx.size - 1)
                     for (i in mx.indices) {
@@ -207,6 +207,7 @@ fun alignFileByWidth(inputName: String, outputName: String) {
                         }
                     }
                 }
+            }
             it.newLine()
         }
     }
