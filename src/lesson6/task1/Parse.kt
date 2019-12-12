@@ -77,22 +77,22 @@ fun dateStrToDigit(str: String): String {
     var day = x[0]
     var month = x[1]
     val year = x[2].toInt()
-    when (month) {
-        "января" -> month = "01"
-        "февраля" -> month = "02"
-        "марта" -> month = "03"
-        "апреля" -> month = "04"
-        "мая" -> month = "05"
-        "июня" -> month = "06"
-        "июля" -> month = "07"
-        "августа" -> month = "08"
-        "сентября" -> month = "09"
-        "октября" -> month = "10"
-        "ноября" -> month = "11"
-        "декабря" -> month = "12"
+    month = when (month) {
+        "января" -> "01"
+        "февраля" -> "02"
+        "марта" -> "03"
+        "апреля" -> "04"
+        "мая" -> "05"
+        "июня" -> "06"
+        "июля" -> "07"
+        "августа" -> "08"
+        "сентября" -> "09"
+        "октября" -> "10"
+        "ноября" -> "11"
+        "декабря" -> "12"
         else -> return ""
     }
-    day = "$day".padStart(2, '0')
+    day = day.padStart(2, '0')
     if (daysInMonth(month.toInt(), year).toString() >= x[0])
         return "$day.$month.$year"
     return ""
