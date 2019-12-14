@@ -322,7 +322,7 @@ fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
                 '-' -> x[indexnow]--
                 '>' -> {
                     indexnow++
-                    if (indexnow > cells) throw IllegalStateException()
+                    if (indexnow >= cells) throw IllegalStateException()
                 }
                 '<' -> {
                     indexnow--
