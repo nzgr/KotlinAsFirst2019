@@ -297,7 +297,7 @@ fun fromRoman(roman: String): Int = TODO()
 
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
     val x = mutableListOf<Int>()
-    for (i in 0 until cells) x.add(0)
+    for (s in 0 until cells) x.add(0)
     var commandssplit = commands
     var indexnow = cells / 2
     if (commands.contains(Regex("""[^-+><\[\]\s]""")))
