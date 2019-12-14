@@ -311,7 +311,7 @@ fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
             else -> if (open < close)
                 throw IllegalArgumentException()
         }
-    if (open != close && open != 0 && close != 0)
+    if (open != close)
         throw IllegalArgumentException()
     var i = 0
     var t = 0
@@ -341,7 +341,7 @@ fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
                             if (commandssplit[m] == ']') closex++
                             m++
                         } while (openx != closex)
-                        i = m
+                        i = m - 1
                     }
                 }
                 else -> {
@@ -354,7 +354,7 @@ fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
                             if (commandssplit[m] == ']') closex++
                             m--
                         } while (openx != closex)
-                        i = m
+                        i = m + 1
                     }
                 }
             }
