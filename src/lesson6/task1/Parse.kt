@@ -213,6 +213,7 @@ fun plusMinus(expression: String): Int {
     }
     return rez
 }
+
 /**
  * Сложная
  *
@@ -294,4 +295,73 @@ fun fromRoman(roman: String): Int = TODO()
  * IllegalArgumentException должен бросаться даже если ошибочная команда не была достигнута в ходе выполнения.
  *
  */
-fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> = TODO()
+
+fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
+    val x = mutableListOf<Int>()
+    for (i in 0 until cells) x.add(0)
+    var commandssplit = commands
+    var indexnow = cells / 2
+    if (commands.contains(Regex("""[^-+><\[\]\s]""")))
+        throw IllegalArgumentException()
+    var open = 0
+    var close = 0
+    for (elem in commands)
+        when (elem) {
+            '[' -> open++
+            ']' -> close++
+            else -> if (open < close)
+                throw IllegalArgumentException()
+        }
+    if (open != close && open != 0 && close != 0)
+        throw IllegalArgumentException()
+    var i = 0
+    var t = 0
+    while (i < commandssplit.length) {
+        if (t < limit)
+            when (commandssplit[i]) {
+                '+' -> x[indexnow]++
+                '-' -> x[indexnow]--
+                '>' -> {
+                    indexnow++
+                    if (indexnow > cells) throw IllegalStateException()
+                }
+                '<' -> {
+                    indexnow--
+                    if (indexnow < 0) throw IllegalStateException()
+                }
+                ' ' -> {
+
+                }
+                '[' -> {
+                    if (x[indexnow] == 0) {
+                        var m = i
+                        var openx = 0
+                        var closex = 0
+                        do {
+                            if (commandssplit[m] == '[') openx++
+                            if (commandssplit[m] == ']') closex++
+                            m++
+                        } while (openx != closex)
+                        i = m
+                    }
+                }
+                else -> {
+                    if (x[indexnow] != 0) {
+                        var m = i
+                        var openx = 0
+                        var closex = 0
+                        do {
+                            if (commandssplit[m] == '[') openx++
+                            if (commandssplit[m] == ']') closex++
+                            m--
+                        } while (openx != closex)
+                        i = m
+                    }
+                }
+            }
+        else break
+        i++
+        t++
+    }
+    return x.toList()
+}
