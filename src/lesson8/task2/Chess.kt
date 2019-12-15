@@ -22,7 +22,22 @@ data class Square(val column: Int, val row: Int) {
      * В нотации, колонки обозначаются латинскими буквами от a до h, а ряды -- цифрами от 1 до 8.
      * Для клетки не в пределах доски вернуть пустую строку
      */
-    fun notation(): String = TODO()
+    fun notation(): String {
+        return if (column in 1..8 && row in 1..8) {
+            var a = 'a'
+            a = when (column) {
+                1 -> 'a'
+                2 -> 'b'
+                3 -> 'c'
+                4 -> 'd'
+                5 -> 'e'
+                6 -> 'f'
+                7 -> 'g'
+                else -> 'h'
+            }
+            "$a$row"
+        } else ""
+    }
 }
 
 /**
@@ -32,7 +47,20 @@ data class Square(val column: Int, val row: Int) {
  * В нотации, колонки обозначаются латинскими буквами от a до h, а ряды -- цифрами от 1 до 8.
  * Если нотация некорректна, бросить IllegalArgumentException
  */
-fun square(notation: String): Square = TODO()
+fun square(notation: String): Square =
+    if (notation.length > 2 || notation[1] - '0' > 8 || notation[1] - '0' < 1) throw IllegalArgumentException()
+    else when (notation[0]) {
+        'a' -> Square(notation[0] - 'a' + 1, notation[1] - '0')
+        'b' -> Square(notation[0] - 'a' + 1, notation[1] - '0')
+        'c' -> Square(notation[0] - 'a' + 1, notation[1] - '0')
+        'd' -> Square(notation[0] - 'a' + 1, notation[1] - '0')
+        'e' -> Square(notation[0] - 'a' + 1, notation[1] - '0')
+        'f' -> Square(notation[0] - 'a' + 1, notation[1] - '0')
+        'g' -> Square(notation[0] - 'a' + 1, notation[1] - '0')
+        'h' -> Square(notation[0] - 'a' + 1, notation[1] - '0')
+        else -> throw IllegalArgumentException()
+    }
+
 
 /**
  * Простая
@@ -57,7 +85,16 @@ fun square(notation: String): Square = TODO()
  * Пример: rookMoveNumber(Square(3, 1), Square(6, 3)) = 2
  * Ладья может пройти через клетку (3, 3) или через клетку (6, 1) к клетке (6, 3).
  */
-fun rookMoveNumber(start: Square, end: Square): Int = TODO()
+fun rookMoveNumber(start: Square, end: Square): Int {
+    if (start.column in 1..8 && end.column in 1..8 && start.row in 1..8 && end.row in 1..8) {
+        return when {
+            start.column == end.column && start.row == end.row -> 0
+            start.column != end.column && start.row != end.row -> 2
+            else -> 1
+        }
+    } else throw IllegalArgumentException()
+}
+
 
 /**
  * Средняя
