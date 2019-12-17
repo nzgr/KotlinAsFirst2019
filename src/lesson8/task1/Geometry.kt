@@ -191,14 +191,21 @@ fun findNearestCirclePair(vararg circles: Circle): Pair<Circle, Circle> = TODO()
  * построить окружность, описанную вокруг треугольника - эквивалентная задача).
  */
 fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
-    val xc = (((b.y - a.y) / (b.x - a.x)) * ((c.y - b.y) / (c.x - b.x)) * (a.y - c.y) +
-            ((c.y - b.y) / (c.x - b.x)) * (a.x + b.x) -
-            ((b.y - a.y) / (b.x - a.x)) * (b.x - c.x)) / (2 * (((c.y - b.y) / (c.x - b.x)) - (b.y - a.y) / (b.x - a.x)))
-    val yc = (a.y + b.y) / 2 - (xc - (a.x + b.x) / 2) / ((b.y - a.y) / (b.x - a.x))
-    val r = sqrt(sqr(a.x - xc) + sqr(a.y - yc))
-    val pc = Point(xc, yc)
-    return Circle(center = pc, radius = r)
-}
+    val az = b.x - a.x
+    val bz = b.y - a.y
+    val cz = c.x - a.x;
+    val dz = c.y - a.y;
+    val E = az * (a.x + b.x) + bz * (a.y + b.y)
+    val F = cz * (a.x + c.x) + dz * (a.y + c.y)
+    val G = 2 * (az * (c.y - b.y) - bz * (c.x - b.x))
+    val xc = (dz * E - bz * F) / G
+    val yc = (az * F - cz * E) / G
+        val r = sqrt(sqr(a.x - xc) + sqr(a.y - yc))
+        val pc = Point(xc, yc)
+        return Circle(center = pc, radius = r)
+    }
+
+
 
 
 /**
