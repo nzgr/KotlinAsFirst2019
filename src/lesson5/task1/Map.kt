@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import java.lang.Integer.max
+
 /**
  * Пример
  *
@@ -307,4 +309,33 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
  *     450
  *   ) -> emptySet()
  */
-fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
+fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
+    var xres = mutableSetOf<String>()
+    var v = mutableListOf<Int>()
+    var w = mutableListOf<Int>()
+    val x = mutableListOf<String>()
+    var n = treasures.size
+    var m = Array(n + 1) {Array (capacity + 1) {0} }
+    for ((xx, wvx) in treasures) {
+        x.add(xx)
+        w.add(wvx.first)
+        v.add(wvx.second)
+    }
+
+    for (i in 1..n) {
+        for (j in 1..capacity)
+            if (w[i - 1] > j)
+                m[i][j] = m[i - 1][j]
+            else
+                m[i][j] = max(m[i - 1][j], m[i - 1][j - w[i-1]] + v[i-1])
+
+    }
+    var capacityx = capacity
+    for (i in n - 1 downTo 0)
+            if (m[i][capacityx] != m[i + 1][capacityx]){
+            xres.add(x[i])
+            capacityx -= w[i]
+            }
+return xres
+
+}
