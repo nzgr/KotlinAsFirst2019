@@ -116,7 +116,14 @@ fun lcm(m: Int, n: Int): Int {
  */
 fun minDivisor(n: Int): Int {
     val m = sqrt(n.toDouble()).toInt()
-    for (i in 2..m)
+    if (m > 87) {
+        for (i in 2..87)
+            if (n % i == 0)
+                return i
+        for (i in 87..m step 2)
+            if (n % i == 0)
+                return i
+    } else for (i in 2..m)
         if (n % i == 0)
             return i
     return n
