@@ -81,7 +81,7 @@ fun generateRectangles(height: Int, width: Int): Matrix<Int> {
     val x = MatrixImpl(height, width, 1)
     var end = minOf(height, width)
     if (end % 2 != 0) end++
-    for (h in 1..end) {
+    for (h in 2..end) {
         if (h < width && h < height)
             for (i in h..height - h)
                 for (k in h..width - h)
