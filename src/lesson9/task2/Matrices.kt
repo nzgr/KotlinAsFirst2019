@@ -80,7 +80,7 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> = TODO()
 fun generateRectangles(height: Int, width: Int): Matrix<Int> {
     val x = MatrixImpl(height, width, 1)
     var end = maxOf(height, width)
-    if (end / 2 != 0) end++
+    if (end % 2 != 0) end++
     for (h in 1..end) {
         for (i in h..width - h - 1)
             for (k in h..height - h - 1)
