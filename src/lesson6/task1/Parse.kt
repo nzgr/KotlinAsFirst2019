@@ -108,33 +108,7 @@ fun dateStrToDigit(str: String): String {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String {
-    val x = digital.split(".")
-    if (x.size != 3) return ""
-    val n = x[0].toIntOrNull() ?: return ""
-    val xx = x.toMutableList()
-    val p = x[2].toIntOrNull() ?: return ""
-    when (x[1]) {
-        "01" -> xx[1] = "января"
-        "02" -> xx[1] = "февраля"
-        "03" -> xx[1] = "марта"
-        "04" -> xx[1] = "апреля"
-        "05" -> xx[1] = "мая"
-        "06" -> xx[1] = "июня"
-        "07" -> xx[1] = "июля"
-        "08" -> xx[1] = "августа"
-        "09" -> xx[1] = "сентября"
-        "10" -> xx[1] = "октября"
-        "11" -> xx[1] = "ноября"
-        "12" -> xx[1] = "декабря"
-        else -> return ""
-    }
-    if (n in "01".toInt().."09".toInt()) xx[0] = "$n"
-    if (daysInMonth(x[1].toInt(), p).toString() >= x[0])
-        return xx.joinToString(separator = " ")
-    return ""
-
-}
+fun dateDigitToStr(digital: String): String = TODO()
 
 /**
  * Средняя
@@ -290,7 +264,6 @@ fun fromRoman(roman: String): Int = TODO()
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
     val x = mutableListOf<Int>()
     for (s in 0 until cells) x.add(0)
-    var commandssplit = commands
     var indexnow = cells / 2
     if (commands.contains(Regex("""[^-+><\[\]\s]""")))
         throw IllegalArgumentException()
@@ -307,9 +280,9 @@ fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
         throw IllegalArgumentException()
     var i = 0
     var t = 0
-    while (i < commandssplit.length) {
+    while (i < commands.length) {
         if (t < limit)
-            when (commandssplit[i]) {
+            when (commands[i]) {
                 '+' -> x[indexnow]++
                 '-' -> x[indexnow]--
                 '>' -> {
@@ -329,8 +302,8 @@ fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
                         var openx = 0
                         var closex = 0
                         do {
-                            if (commandssplit[m] == '[') openx++
-                            if (commandssplit[m] == ']') closex++
+                            if (commands[m] == '[') openx++
+                            if (commands[m] == ']') closex++
                             m++
                         } while (openx != closex)
                         i = m - 1
@@ -342,8 +315,8 @@ fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
                         var openx = 0
                         var closex = 0
                         do {
-                            if (commandssplit[m] == '[') openx++
-                            if (commandssplit[m] == ']') closex++
+                            if (commands[m] == '[') openx++
+                            if (commands[m] == ']') closex++
                             m--
                         } while (openx != closex)
                         i = m + 1
