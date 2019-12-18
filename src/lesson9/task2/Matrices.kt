@@ -83,9 +83,9 @@ fun generateRectangles(height: Int, width: Int): Matrix<Int> {
     if (end % 2 != 0) end++
     for (h in 1..end) {
         if (h < width && h < height)
-        for (k in h..width - h)
             for (i in h..height - h)
-                x[i, k] = h + 1
+                for (k in h..width - h)
+                    x[i, k] = h + 1
     }
     return x
 }
