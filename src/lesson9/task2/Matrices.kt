@@ -131,7 +131,29 @@ fun <E> rotate(matrix: Matrix<E>): Matrix<E> = TODO()
  * 1 2 3
  * 3 1 2
  */
-fun isLatinSquare(matrix: Matrix<Int>): Boolean = TODO()
+fun isLatinSquare(matrix: Matrix<Int>): Boolean {
+    if (matrix.height != matrix.width) return false
+    var x = (1..matrix.height).toSet()
+    for (i in 0..matrix.height - 1) {
+        var xx = mutableSetOf<Int>()
+        var k = 0
+        while (k in 0..matrix.width - 1) {
+            xx.add(matrix[i, k])
+            k++
+        }
+        if (xx != x) return false
+    }
+    for (k in 0..matrix.width - 1) {
+        var xx = mutableSetOf<Int>()
+        var i = 0
+        while (i in 0..matrix.height - 1) {
+            xx.add(matrix[i, k])
+            i++
+        }
+        if (xx != x) return false
+    }
+return true
+}
 
 /**
  * Средняя
