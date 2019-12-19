@@ -2,6 +2,9 @@
 
 package lesson1.task1
 
+import com.sun.org.apache.regexp.internal.RE
+import lesson9.task1.MatrixImpl
+import sun.security.ec.point.ProjectivePoint
 import kotlin.math.*
 
 /**
@@ -123,3 +126,22 @@ fun accountInThreeYears(initial: Int, percent: Int): Double =
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
 fun numberRevert(number: Int): Int = number / 100 + number % 10 * 100 + number / 10 % 10 * 10
+
+// test //
+fun myFun(people: List<String>): Map<Set<String>, String> {
+    val res = mutableMapOf<Set<String>, String>()
+    val scolor = mutableSetOf<Set<String>>()
+    for (elem in people) {
+        val otdelenie = elem.split(":")
+        val fio = otdelenie[0].split(" ")
+        val name = fio[1]
+        val familiya = fio[0]
+        val colorsx = otdelenie[1].trim().split(", ").toSet()
+        if (colorsx !in scolor) {
+            res[colorsx] = "$name $familiya"
+            scolor.add(colorsx)
+        } else res.remove(colorsx)
+    }
+
+    return res
+}

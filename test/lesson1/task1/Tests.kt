@@ -105,4 +105,17 @@ class Tests {
         assertEquals(874, numberRevert(478))
         assertEquals(201, numberRevert(102))
     }
+
+    @Test
+    fun myFun() {
+        assertEquals(
+            mapOf(setOf("розовый") to "пп ппп"), myFun(
+            listOf("иванов иван иванович: красный, ежевика",
+            "ппп пп пппп: розовый", "иванов петр иванович: красный, ежевика")))
+
+    }
+
+
+
+
 }
